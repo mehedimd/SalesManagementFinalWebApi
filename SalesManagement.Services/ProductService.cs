@@ -75,6 +75,7 @@ namespace SalesManagement.Services
                 if (product != null)
                 {
                     product.ProductName = newProduct.ProductName;
+                    product.ProductDescription = newProduct.ProductDescription;
                     product.Price = newProduct.Price;
 
                     _unitOfWork.Products.Update(product);

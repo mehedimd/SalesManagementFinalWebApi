@@ -77,7 +77,7 @@ namespace SalesManagement.Controllers
                 var isCreated = await orderService.CreateOrder(order);
                 if (isCreated)
                 {
-                    return Ok("order created successfully");
+                    return Ok();
                 }
             }
             return BadRequest();

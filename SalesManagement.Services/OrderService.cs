@@ -84,6 +84,7 @@ namespace SalesManagement.Services
                     orderFind.PaymentTotal = order.PaymentTotal;
                     orderFind.TotalDue = order.TotalDue;
                     orderFind.PharmacyId = order.PharmacyId;
+                    orderFind.OrderNo = order.OrderNo;
 
                     _unitOfWork.Orders.Update(orderFind);
 
