@@ -12,8 +12,8 @@ using SalesManagement.Infrastructure;
 namespace SalesManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    [Migration("20240514160756_update order,orderItems and Products")]
-    partial class updateorderorderItemsandProducts
+    [Migration("20240515175217_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,6 +110,9 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("OrderNo")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("PaymentTotal")
                         .HasColumnType("decimal(18,2)");
@@ -218,6 +221,10 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()

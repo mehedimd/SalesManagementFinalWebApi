@@ -19,6 +19,6 @@ namespace SalesManagement.Core.Models
         public decimal TotalDue { get; set; }
         public int PharmacyId { get; set; }
         public virtual Pharmacy? Pharmacy { get; set; }
-        public virtual List<OrderItems> OrderItems { get; set; }
+        public virtual List<OrderItems>? OrderItems { get; set; }
     }
 }

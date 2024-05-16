@@ -9,5 +9,8 @@ namespace SalesManagement.Core.Interfaces
 {
     public interface IOrderRepository:IGenericRepository<Order>
     {
+        public System.Object GetAllOrderAnonomous();
+        public System.Object GetOrderByIdAnonomous(int id);
+        public bool UpdateOrderAnnonomous(Order order);
     }
 }

@@ -19,15 +19,6 @@ namespace SalesManagement.Infrastructure.Repositories
         }
       public  System.Object GetUnitConvertions()
         {
-
-            //var unitConvertion = await unitConvertionService.GetAllUnitConvertions();
-            //if (unitConvertion == null)
-            //{
-            //    return NotFound();
-            //}
-            //  return Ok(unitConvertion);
-
-
             var unitAndConvertion = from a in db.UnitConvertions
                                     join b in db.Units
                                     on a.UnitId equals b.UnitId

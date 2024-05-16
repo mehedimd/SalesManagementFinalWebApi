@@ -18,5 +18,8 @@ namespace SalesManagement.Services.Interfaces
         Task<bool> UpdateOrder(Order order);
 
         Task<bool> DeleteOrder(int orderId);
+        System.Object GetAllOrderAnonomous();
+        System.Object GetOrderByIdAnonomous(int orderId);
+        bool UpdateOrderAnnonomous(Order order);
     }
 }

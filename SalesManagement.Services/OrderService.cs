@@ -71,7 +71,6 @@ namespace SalesManagement.Services
             }
             return null;
         }
-
         public async Task<bool> UpdateOrder(Order order)
         {
             if (order != null)
@@ -98,5 +97,24 @@ namespace SalesManagement.Services
             }
             return false;
         }
+        // extra service
+        public  System.Object GetAllOrderAnonomous()
+        {
+            var orderList =  _unitOfWork.Orders.GetAllOrderAnonomous();
+            return orderList;
+        }
+        // getById
+        public System.Object GetOrderByIdAnonomous(int orderId)
+        {
+            var order = _unitOfWork.Orders.GetOrderByIdAnonomous(orderId);
+            return order;
+        }
+        // update order
+        public bool UpdateOrderAnnonomous (Order order)
+        {
+            var isUpdated = _unitOfWork.Orders.UpdateOrderAnnonomous( order);
+            return isUpdated;
+        }
+
     }
 }

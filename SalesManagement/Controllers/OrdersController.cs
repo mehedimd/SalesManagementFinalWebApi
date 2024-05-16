@@ -24,25 +24,34 @@ namespace SalesManagement.Controllers
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
-        {
-            var orders = await orderService.GetAllOrders();
-          if (orders == null)
-          {
-              return NotFound();
-          }
-            return Ok(orders);
-        }
+        //public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        //{
+        //    var orders = await orderService.GetAllOrders();
+        //  if (orders == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    return Ok(orders);
+        //}
 
+        public  System.Object GetOrders()
+        {
+            var orders =  orderService.GetAllOrderAnonomous();
+            if (orders == null)
+            {
+                return NotFound();
+            }
+            return orders;
+        }
         // GET: api/Orders/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public System.Object GetOrder(int id)
         {
-          var order = await orderService.GetOrderById(id);
-          if (order == null)
-          {
-              return NotFound();
-          }
+            var order =  orderService.GetOrderByIdAnonomous(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
 
             return Ok(order);
         }
@@ -50,20 +59,16 @@ namespace SalesManagement.Controllers
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public System.Object PutOrder( Order order)
         {
-            if(order.OrderId != id)
+            if (order != null)
             {
-                return BadRequest();
-            }
-            if(order != null)
-            {
-                var isUpdated = await orderService.UpdateOrder(order);
+                var isUpdated =  orderService.UpdateOrderAnnonomous(order);
                 if (isUpdated)
                 {
                     return Ok("order updated successfully");
                 }
-            }       
+            }
             return BadRequest();
         }
 
@@ -77,7 +82,7 @@ namespace SalesManagement.Controllers
                 var isCreated = await orderService.CreateOrder(order);
                 if (isCreated)
                 {
-                    return Ok();
+                    return Ok("Successfully Created");
                 }
             }
             return BadRequest();
@@ -88,10 +93,10 @@ namespace SalesManagement.Controllers
         public async Task<IActionResult> DeleteOrder(int id)
         {
             var isDeleted = await orderService.DeleteOrder(id);
- 
+
             if (isDeleted)
             {
-                return Ok("Product Successfully Deleted");
+                return Ok("Order Successfully Deleted");
             }
 
             return BadRequest();
