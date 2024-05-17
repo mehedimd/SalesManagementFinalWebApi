@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -16,7 +17,7 @@ namespace SalesManagement.Infrastructure
     //        return new DbContextClass(optionsBuilder.Options);
     //    }
     //}
-    public partial class DbContextClass : DbContext
+    public partial class DbContextClass : IdentityDbContext<ApplicationUser>
     {
         public DbContextClass()
         {

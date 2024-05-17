@@ -16,4 +16,5 @@ namespace SalesManagement.Infrastructure.Repositories
             
         }
     }
+    
 }
