@@ -28,7 +28,7 @@ namespace SalesManagement.Controllers
             var existUser = await userManager.FindByEmailAsync(user.Email);
             if (existUser != null)
             {
-                return BadRequest("This User Already Exists");
+                return BadRequest(new {error = "This User Already Exists" });
             }
             var newUser = new ApplicationUser()
             {
@@ -76,6 +76,10 @@ namespace SalesManagement.Controllers
                                 );
                             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOption);
                             return Ok(new AuthenticatedResponse { Token = tokenString });
+                    }
+                    else
+                    {
+                        return Unauthorized(new { error = "invalid password" });
                     }
                 }
                 
