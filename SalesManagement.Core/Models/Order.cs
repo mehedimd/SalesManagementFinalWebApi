@@ -15,8 +15,9 @@ namespace SalesManagement.Core.Models
         [DataType(DataType.Date)]
         public DateTime OrderDate { get; set; }
         public decimal GrandTotal { get; set; }
-        public decimal PaymentTotal { get; set; }
-        public decimal TotalDue { get; set; }
+        public bool IsApproved { get; set; } = false;
+        public bool IsDelivered { get; set; } = false;
+
         public int PharmacyId { get; set; }
         public virtual Pharmacy? Pharmacy { get; set; }
         public virtual List<OrderItems>? OrderItems { get; set; }

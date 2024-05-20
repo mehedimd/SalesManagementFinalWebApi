@@ -310,31 +310,26 @@ namespace SalesManagement.Infrastructure.Migrations
                     b.Property<decimal>("GrandTotal")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelivered")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long>("OrderNo")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal>("PaymentTotal")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("PharmacyId")
                         .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalDue")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("PharmacyId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
                 });
@@ -356,11 +351,16 @@ namespace SalesManagement.Infrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("UnitId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UnitId");
 
                     b.ToTable("OrderItems");
                 });
@@ -590,10 +590,6 @@ namespace SalesManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SalesManagement.Core.Models.Product", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId");
-
                     b.Navigation("Pharmacy");
                 });
 
@@ -611,9 +607,17 @@ namespace SalesManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SalesManagement.Core.Models.Unit", "unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+
+                    b.Navigation("unit");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Product", b =>
@@ -652,7 +656,7 @@ namespace SalesManagement.Infrastructure.Migrations
             modelBuilder.Entity("SalesManagement.Core.Models.UnitConvertion", b =>
                 {
                     b.HasOne("SalesManagement.Core.Models.Product", "Product")
-                        .WithMany("UnitConvertions")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -688,13 +692,6 @@ namespace SalesManagement.Infrastructure.Migrations
             modelBuilder.Entity("SalesManagement.Core.Models.Pharmacy", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("SalesManagement.Core.Models.Product", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("UnitConvertions");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.SalesTarget", b =>

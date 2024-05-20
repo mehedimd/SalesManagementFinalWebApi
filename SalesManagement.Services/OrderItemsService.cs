@@ -87,6 +87,7 @@ namespace SalesManagement.Services
                     orderItemsFind.Quantity=orderItems.Quantity;
                     orderItemsFind.ProductId = orderItems.ProductId;
                     orderItemsFind.OrderId = orderItems.OrderId;
+                    orderItemsFind.UnitId = orderItems.UnitId;
                     _unitOfWork.OrderItems.Update(orderItemsFind);
                     var result = _unitOfWork.Save();
 

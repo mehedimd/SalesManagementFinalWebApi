@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace SalesManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService orderService;
@@ -66,7 +68,7 @@ namespace SalesManagement.Controllers
                 var isUpdated =  orderService.UpdateOrderAnnonomous(order);
                 if (isUpdated)
                 {
-                    return Ok("order updated successfully");
+                    return Ok(new {message = "order updated successfully" });
                 }
             }
             return BadRequest();
@@ -82,7 +84,7 @@ namespace SalesManagement.Controllers
                 var isCreated = await orderService.CreateOrder(order);
                 if (isCreated)
                 {
-                    return Ok("Successfully Created");
+                    return Ok(new  { message = "Successfully Created" });
                 }
             }
             return BadRequest();
@@ -96,7 +98,7 @@ namespace SalesManagement.Controllers
 
             if (isDeleted)
             {
-                return Ok("Order Successfully Deleted");
+                return Ok(new {message= "Order Successfully Deleted" });
             }
 
             return BadRequest();

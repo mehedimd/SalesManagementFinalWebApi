@@ -27,8 +27,8 @@ namespace SalesManagement.Infrastructure.Repositories
                                 o.OrderNo,
                                 o.OrderDate,
                                 o.GrandTotal,
-                                o.PaymentTotal,
-                                o.TotalDue,
+                                o.IsApproved,
+                                o.IsDelivered,
                                 pharmacy.PharmacyName
                             };
             return orderList;
@@ -44,13 +44,15 @@ namespace SalesManagement.Infrastructure.Repositories
                             o.OrderNo,
                             o.OrderDate,
                             o.GrandTotal,
-                            o.PaymentTotal,
-                            o.TotalDue,
+                            o.IsApproved,
+                            o.IsDelivered,
                             o.PharmacyId
                         }).FirstOrDefault();
             var orderItems = (from o in db.OrderItems
                              join p in db.Products
                              on o.ProductId equals p.ProductId
+                             join u in db.Units
+                             on o.UnitId equals u.UnitId
                              where o.OrderId == id
                              select new
                              {
@@ -58,6 +60,8 @@ namespace SalesManagement.Infrastructure.Repositories
                                  o.OrderId,
                                  o.ProductId,
                                  p.ProductName,
+                                 o.UnitId,
+                                 u.UnitName,
                                  p.Price,
                                  o.Quantity,
                                  Total = p.Price * o.Quantity

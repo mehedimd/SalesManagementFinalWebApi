@@ -71,7 +71,7 @@ namespace SalesManagement.Controllers
                                     issuer: "https://localhost:7140",
                                     audience: "https://localhost:7140",
                                     claims: new List<Claim>(),
-                                    expires: DateTime.Now.AddMinutes(5),
+                                    expires: DateTime.Now.AddMinutes(25),
                                     signingCredentials: signinCredential
                                 );
                             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOption);

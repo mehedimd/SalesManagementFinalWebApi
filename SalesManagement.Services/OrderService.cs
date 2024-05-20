@@ -80,9 +80,9 @@ namespace SalesManagement.Services
                 {
                     orderFind.OrderDate = order.OrderDate;
                     orderFind.GrandTotal = order.GrandTotal;
-                    orderFind.PaymentTotal = order.PaymentTotal;
-                    orderFind.TotalDue = order.TotalDue;
                     orderFind.PharmacyId = order.PharmacyId;
+                    orderFind.IsApproved = order.IsApproved;
+                    orderFind.IsDelivered = order.IsDelivered;
                     orderFind.OrderNo = order.OrderNo;
 
                     _unitOfWork.Orders.Update(orderFind);
