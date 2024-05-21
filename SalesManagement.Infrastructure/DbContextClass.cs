@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -21,7 +22,7 @@ namespace SalesManagement.Infrastructure
     {
         public DbContextClass()
         {
-            
+
         }
         public DbContextClass(DbContextOptions<DbContextClass> contextOptions) : base(contextOptions)
         {
@@ -45,6 +46,19 @@ namespace SalesManagement.Infrastructure
             {
                 optionsBuilder.UseSqlServer("Server=.;Database = SalesManagmentFinalDB; User Id=sa;Password=123; TrustServerCertificate = true; Trusted_Connection = true;MultipleActiveResultSets=True;");
             }
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // for user role
+            List<IdentityRole> identityRoles = new List<IdentityRole>(){
+                new IdentityRole(){ Name = "manager", NormalizedName = "manager"},
+                new IdentityRole(){ Name = "sr", NormalizedName = "sr"},
+                new IdentityRole(){ Name = "rider", NormalizedName = "rider"}
+
+            };
+            builder.Entity<IdentityRole>().HasData(identityRoles);
         }
 
     }

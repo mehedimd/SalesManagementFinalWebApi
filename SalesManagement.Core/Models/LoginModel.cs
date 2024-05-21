@@ -10,9 +10,12 @@ namespace SalesManagement.Core.Models
     {
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        
     }
     public class AuthenticatedResponse
     {
         public string? Token { get; set; }
+        public string? Role { get; set; }
+        public System.Object? applicationUser { get; set; }
     }
 }

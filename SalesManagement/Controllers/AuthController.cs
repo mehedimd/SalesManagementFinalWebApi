@@ -16,10 +16,12 @@ namespace SalesManagement.Controllers
     public class AuthController : ControllerBase
     {
         private UserManager<ApplicationUser> userManager;
+
         private DbContextClass db;
         public AuthController(UserManager<ApplicationUser> _userManager, DbContextClass _db)
         {
             this.userManager = _userManager;
+   
             this.db = _db;
         }
         [HttpPost("register")]
@@ -38,6 +40,7 @@ namespace SalesManagement.Controllers
                 Email = user.Email,
 
             };
+            
             var result = await userManager.CreateAsync(newUser, user.Password);
             if (result.Succeeded)
             {
@@ -55,15 +58,19 @@ namespace SalesManagement.Controllers
             else
             {
                 var existUser = await userManager.FindByEmailAsync(user.UserName);
+                var logInuser = new { userName = existUser.UserName, FirstName = existUser.FirstName, LastName = existUser.LastName };
                 if (existUser == null)
                 {
                     return Unauthorized(new { error = "invalid username" });
                 }
                 else
                 {
+                    
                     var checkPass = await userManager.CheckPasswordAsync(existUser, user.Password);
                     if (checkPass)
                     {
+                        var role = await userManager.GetRolesAsync(existUser);
+                        
                             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345"));
                             var signinCredential = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                             var tokenOption = new JwtSecurityToken
@@ -75,17 +82,13 @@ namespace SalesManagement.Controllers
                                     signingCredentials: signinCredential
                                 );
                             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOption);
-                            return Ok(new AuthenticatedResponse { Token = tokenString });
-                    }
-                    else
-                    {
-                        return Unauthorized(new { error = "invalid password" });
+                            return Ok(new AuthenticatedResponse { Token = tokenString, Role = role.FirstOrDefault(), applicationUser = logInuser });
                     }
                 }
-                
-                
+
+                return Unauthorized(new { error = "Invalid username or password" });
             }
-            return Unauthorized(new {error = "Invalid username or password" });
+            
         }
     }
 }
