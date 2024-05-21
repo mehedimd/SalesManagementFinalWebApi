@@ -37,6 +37,8 @@ namespace SalesManagement.Infrastructure.Repositories
         public System.Object GetOrderByIdAnonomous(int id)
         {
             var order = (from o in db.Orders
+                         join p in db.Pharmacies
+                         on o.PharmacyId equals p.PharmacyId
                         where o.OrderId == id
                         select new
                         {
@@ -46,7 +48,9 @@ namespace SalesManagement.Infrastructure.Repositories
                             o.GrandTotal,
                             o.IsApproved,
                             o.IsDelivered,
-                            o.PharmacyId
+                            o.PharmacyId,
+                            p.PharmacyName
+                            
                         }).FirstOrDefault();
             var orderItems = (from o in db.OrderItems
                              join p in db.Products
