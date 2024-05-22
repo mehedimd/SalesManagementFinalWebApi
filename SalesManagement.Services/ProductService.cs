@@ -77,6 +77,7 @@ namespace SalesManagement.Services
                     product.ProductName = newProduct.ProductName;
                     product.ProductDescription = newProduct.ProductDescription;
                     product.Price = newProduct.Price;
+                    product.CategoryId = newProduct.CategoryId;
 
                     _unitOfWork.Products.Update(product);
 
