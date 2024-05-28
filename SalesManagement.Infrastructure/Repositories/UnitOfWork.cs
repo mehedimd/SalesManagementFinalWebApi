@@ -20,7 +20,8 @@ namespace SalesManagement.Infrastructure.Repositories
         public ISalesTargetRepository SalesTargets { get; }
         public IUnitRepository Units { get; }
         public IUnitConversionRepository UnitConversions { get; }
-        public UnitOfWork(DbContextClass dbContext, IProductRepository productRepository, ICategoryRepository categories, IEmployeeRepository employees, IOrderRepository orders, IOrderItemsRepository orderItems,IPharmacyRepository pharmacies, ISalesAchivementRepository salesAchivmants, ISalesTargetRepository salesTargets, IUnitRepository units, IUnitConversionRepository unitConversions)
+        public IStockRepository Stocks { get; }
+        public UnitOfWork(DbContextClass dbContext, IProductRepository productRepository, ICategoryRepository categories, IEmployeeRepository employees, IOrderRepository orders, IOrderItemsRepository orderItems,IPharmacyRepository pharmacies, ISalesAchivementRepository salesAchivmants, ISalesTargetRepository salesTargets, IUnitRepository units, IUnitConversionRepository unitConversions, IStockRepository stocks)
         {
             _dbContext = dbContext;
             Products = productRepository;
@@ -33,6 +34,7 @@ namespace SalesManagement.Infrastructure.Repositories
             SalesTargets = salesTargets;
             Units = units;
             UnitConversions = unitConversions;
+            Stocks = stocks;
         }
         public int Save()
         {

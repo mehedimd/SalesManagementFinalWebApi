@@ -51,22 +51,22 @@ namespace SalesManagement.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "20d42428-d0e8-416a-b843-9f83e37bca97",
-                            ConcurrencyStamp = "7861abdc-0658-4477-8c1c-7d40502ee2c2",
+                            Id = "8d87ca71-52a6-4fe9-9894-182ee73d0638",
+                            ConcurrencyStamp = "b95f262c-3f83-4668-9864-c07a81f03b25",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "be0a4254-9721-419f-843b-3783ef1fc870",
-                            ConcurrencyStamp = "25082e0a-7706-4c79-a2c6-f9eb0261597f",
+                            Id = "4f2bb286-5b25-45e0-9781-aec707ec1342",
+                            ConcurrencyStamp = "9affb145-eb9f-49f6-a99d-bcbc337278c8",
                             Name = "sr",
                             NormalizedName = "sr"
                         },
                         new
                         {
-                            Id = "4932ec56-47b6-47fa-a2f6-8c0c8b190abc",
-                            ConcurrencyStamp = "2adaf978-6637-4ab2-bfd3-3688c4764381",
+                            Id = "19f3d7f9-31ae-469f-a014-d93d9bd3e015",
+                            ConcurrencyStamp = "ed59f835-515b-494c-8147-b1374a9869a9",
                             Name = "rider",
                             NormalizedName = "rider"
                         });
@@ -507,6 +507,27 @@ namespace SalesManagement.Infrastructure.Migrations
                     b.ToTable("SalesTargets");
                 });
 
+            modelBuilder.Entity("SalesManagement.Core.Models.Stock", b =>
+                {
+                    b.Property<int>("StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StockId"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Stocks");
+                });
+
             modelBuilder.Entity("SalesManagement.Core.Models.Unit", b =>
                 {
                     b.Property<int>("UnitId")
@@ -674,6 +695,17 @@ namespace SalesManagement.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("SalesManagement.Core.Models.Stock", b =>
+                {
+                    b.HasOne("SalesManagement.Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.UnitConvertion", b =>

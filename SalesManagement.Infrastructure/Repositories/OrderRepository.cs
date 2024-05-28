@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class OrderRepository:GenericRepository<Order>,IOrderRepository
+    public class OrderRepository:GenericRepository<Order>,IOrderRepository
     {
         private readonly DbContextClass db;
         public OrderRepository(DbContextClass dbContext) : base(dbContext)
@@ -73,27 +73,79 @@ namespace SalesManagement.Infrastructure.Repositories
                              }).ToList();
             return new { order,orderItems};
         }
+        // add order
+        public bool CreateOrderAnnonomous(Order order)
+        {
+            using(var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    if(order != null)
+                    {
+                        db.Orders.Add(order);
+                        if (db.SaveChanges() > 0)
+                        {
+                            foreach(var item in order.OrderItems)
+                            {
+                                var productId = item.ProductId;
+                                var qty = item.Quantity;
+                                var stockItem = db.Stocks.Where(s => s.ProductId == productId).FirstOrDefault();
+                                stockItem.Quantity = stockItem.Quantity - qty;
+                                db.Stocks.Update(stockItem);
+                                db.SaveChanges();
+                            }
+                            transaction.Commit();
+                            return true;
+                        }
+                        
+                    }
+                }// try end
+                catch
+                {
+                    transaction.Rollback();
+                }// catch end
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+            return false;
+        }
         // update order
         public bool UpdateOrderAnnonomous(Order order)
         {
-            db.OrderItems.RemoveRange(db.OrderItems.Where(d => d.OrderId == order.OrderId).ToList());
-            db.SaveChanges();
-            foreach (var item in order.OrderItems)
+            using(var transaction = db.Database.BeginTransaction())
             {
-                if(item.Id > 0)
+                try
                 {
-                    item.Id = 0;
+                    db.OrderItems.RemoveRange(db.OrderItems.Where(d => d.OrderId == order.OrderId).ToList());
+                    db.SaveChanges();
+                    foreach (var item in order.OrderItems)
+                    {
+                        if (item.Id > 0)
+                        {
+                            item.Id = 0;
+                        }
+
+                    }
+
+                    db.Attach(order);
+                    db.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        transaction.Commit();
+                        return true;
+                    }
+                }// try end
+                catch
+                {
+                    transaction.Rollback();
+                }// catch end
+                finally
+                {
+                    transaction.Dispose();
                 }
-
             }
-
-            db.Attach(order);
-            db.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            if (db.SaveChanges() > 0)
-            {
-                return true;
-            }
-            
             return false;
         }
     }

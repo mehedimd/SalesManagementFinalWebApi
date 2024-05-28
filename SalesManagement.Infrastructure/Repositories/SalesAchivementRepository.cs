@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class SalesAchivementRepository:GenericRepository<SalesAchivement>,ISalesAchivementRepository
+    public class SalesAchivementRepository:GenericRepository<SalesAchivement>,ISalesAchivementRepository
     {
         public SalesAchivementRepository(DbContextClass dbContext) : base(dbContext)
         {

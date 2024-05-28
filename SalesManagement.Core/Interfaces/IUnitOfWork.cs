@@ -18,6 +18,7 @@ namespace SalesManagement.Core.Interfaces
         public ISalesTargetRepository SalesTargets { get; }
         public IUnitRepository Units { get; }
         public IUnitConversionRepository UnitConversions { get; }
+        public IStockRepository Stocks { get; }
         int Save();
     }
 }

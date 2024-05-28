@@ -12,5 +12,6 @@ namespace SalesManagement.Core.Interfaces
         public System.Object GetAllOrderAnonomous();
         public System.Object GetOrderByIdAnonomous(int id);
         public bool UpdateOrderAnnonomous(Order order);
+        public bool CreateOrderAnnonomous(Order order);
     }
 }

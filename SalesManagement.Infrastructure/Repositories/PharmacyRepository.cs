@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class PharmacyRepository:GenericRepository<Pharmacy>,IPharmacyRepository
+    public class PharmacyRepository:GenericRepository<Pharmacy>,IPharmacyRepository
     {
         public PharmacyRepository(DbContextClass dbContext) : base(dbContext)
         {

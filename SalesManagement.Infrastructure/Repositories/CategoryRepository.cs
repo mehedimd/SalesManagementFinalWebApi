@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class CategoryRepository:GenericRepository<Category>, ICategoryRepository
+    public class CategoryRepository:GenericRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(DbContextClass dbContext) : base(dbContext)
         {
