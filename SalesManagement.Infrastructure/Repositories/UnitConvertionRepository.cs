@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class UnitConvertionRepository:GenericRepository<UnitConvertion>,IUnitConversionRepository
+    public class UnitConvertionRepository:GenericRepository<UnitConvertion>,IUnitConversionRepository
     {
         private readonly DbContextClass db;
         public UnitConvertionRepository(DbContextClass dbContext) : base(dbContext)

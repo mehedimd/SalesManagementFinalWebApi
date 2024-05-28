@@ -39,6 +39,7 @@ namespace SalesManagement.Infrastructure
         public virtual DbSet<SalesTarget> SalesTargets { get; set; } = null!;
         public virtual DbSet<Unit> Units { get; set; } = null!;
         public virtual DbSet<UnitConvertion> UnitConvertions { get; set; } = null!;
+        public virtual DbSet<Stock> Stocks { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,12 +54,13 @@ namespace SalesManagement.Infrastructure
 
             // for user role
             List<IdentityRole> identityRoles = new List<IdentityRole>(){
-                new IdentityRole(){ Name = "manager", NormalizedName = "manager"},
-                new IdentityRole(){ Name = "sr", NormalizedName = "sr"},
-                new IdentityRole(){ Name = "rider", NormalizedName = "rider"}
+                        new IdentityRole(){ Name = "manager", NormalizedName = "manager"},
+                        new IdentityRole(){ Name = "sr", NormalizedName = "sr"},
+                        new IdentityRole(){ Name = "rider", NormalizedName = "rider"}
 
-            };
+                    };
             builder.Entity<IdentityRole>().HasData(identityRoles);
+
         }
 
     }

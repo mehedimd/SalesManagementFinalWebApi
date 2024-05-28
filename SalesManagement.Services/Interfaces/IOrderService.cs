@@ -11,15 +11,16 @@ namespace SalesManagement.Services.Interfaces
     {
         Task<bool> CreateOrder(Order order);
 
-        Task<IEnumerable<Order>> GetAllOrders();
+        //Task<IEnumerable<Order>> GetAllOrders();
 
-        Task<Order> GetOrderById(int orderId);
+        //Task<Order> GetOrderById(int orderId);
 
-        Task<bool> UpdateOrder(Order order);
+        //Task<bool> UpdateOrder(Order order);
 
         Task<bool> DeleteOrder(int orderId);
         System.Object GetAllOrderAnonomous();
         System.Object GetOrderByIdAnonomous(int orderId);
+        bool CreateOrderAnnonomous(Order order);
         bool UpdateOrderAnnonomous(Order order);
     }
 }

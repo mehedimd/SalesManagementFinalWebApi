@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class EmployeeRepository:GenericRepository<Employee>,IEmployeeRepository
+    public class EmployeeRepository:GenericRepository<Employee>,IEmployeeRepository
     {
         public EmployeeRepository(DbContextClass dbContext) : base(dbContext)
         {

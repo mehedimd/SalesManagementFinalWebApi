@@ -75,13 +75,12 @@ namespace SalesManagement.Controllers
         }
 
         // POST: api/Orders
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public System.Object PostOrder(Order order)
         {
             if (order != null)
             {
-                var isCreated = await orderService.CreateOrder(order);
+                var isCreated = orderService.CreateOrderAnnonomous(order);
                 if (isCreated)
                 {
                     return Ok(new  { message = "Successfully Created" });

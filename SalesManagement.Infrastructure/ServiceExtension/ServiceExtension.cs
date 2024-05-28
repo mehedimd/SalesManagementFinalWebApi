@@ -31,6 +31,7 @@ namespace SalesManagement.Infrastructure.ServiceExtension
             services.AddScoped<ISalesTargetRepository, SalesTargetRepository>();
             services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IUnitConversionRepository, UnitConvertionRepository>();
+            services.AddScoped<IStockRepository, StockRepository>();
 
 
             return services;

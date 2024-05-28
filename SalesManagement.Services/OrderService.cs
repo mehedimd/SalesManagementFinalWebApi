@@ -20,6 +20,7 @@ namespace SalesManagement.Services
 
         public async Task<bool> CreateOrder(Order order)
         {
+            
             if (order != null)
             {
                 await _unitOfWork.Orders.Add(order);
@@ -53,50 +54,50 @@ namespace SalesManagement.Services
             return false;
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrders()
-        {
-            var orderList = await _unitOfWork.Orders.GetAll();
-            return orderList;
-        }
+        //public async Task<IEnumerable<Order>> GetAllOrders()
+        //{
+        //    var orderList = await _unitOfWork.Orders.GetAll();
+        //    return orderList;
+        //}
 
-        public async Task<Order> GetOrderById(int orderId)
-        {
-            if (orderId > 0)
-            {
-                var order = await _unitOfWork.Orders.GetById(orderId);
-                if (order != null)
-                {
-                    return order;
-                }
-            }
-            return null;
-        }
-        public async Task<bool> UpdateOrder(Order order)
-        {
-            if (order != null)
-            {
-                var orderFind = await _unitOfWork.Orders.GetById(order.OrderId);
-                if (orderFind != null)
-                {
-                    orderFind.OrderDate = order.OrderDate;
-                    orderFind.GrandTotal = order.GrandTotal;
-                    orderFind.PharmacyId = order.PharmacyId;
-                    orderFind.IsApproved = order.IsApproved;
-                    orderFind.IsDelivered = order.IsDelivered;
-                    orderFind.OrderNo = order.OrderNo;
+        //public async Task<Order> GetOrderById(int orderId)
+        //{
+        //    if (orderId > 0)
+        //    {
+        //        var order = await _unitOfWork.Orders.GetById(orderId);
+        //        if (order != null)
+        //        {
+        //            return order;
+        //        }
+        //    }
+        //    return null;
+        //}
+        //public async Task<bool> UpdateOrder(Order order)
+        //{
+        //    if (order != null)
+        //    {
+        //        var orderFind = await _unitOfWork.Orders.GetById(order.OrderId);
+        //        if (orderFind != null)
+        //        {
+        //            orderFind.OrderDate = order.OrderDate;
+        //            orderFind.GrandTotal = order.GrandTotal;
+        //            orderFind.PharmacyId = order.PharmacyId;
+        //            orderFind.IsApproved = order.IsApproved;
+        //            orderFind.IsDelivered = order.IsDelivered;
+        //            orderFind.OrderNo = order.OrderNo;
 
-                    _unitOfWork.Orders.Update(orderFind);
+        //            _unitOfWork.Orders.Update(orderFind);
 
-                    var result = _unitOfWork.Save();
+        //            var result = _unitOfWork.Save();
 
-                    if (result > 0)
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            return false;
-        }
+        //            if (result > 0)
+        //                return true;
+        //            else
+        //                return false;
+        //        }
+        //    }
+        //    return false;
+        //}
         // extra service
         public  System.Object GetAllOrderAnonomous()
         {
@@ -108,6 +109,12 @@ namespace SalesManagement.Services
         {
             var order = _unitOfWork.Orders.GetOrderByIdAnonomous(orderId);
             return order;
+        }
+        // Create order
+        public bool CreateOrderAnnonomous(Order order)
+        {
+            var isCreated = _unitOfWork.Orders.CreateOrderAnnonomous(order);
+            return isCreated;
         }
         // update order
         public bool UpdateOrderAnnonomous (Order order)

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    public class ProductRepository: GenericRepository<Product>, IProductRepository
+    public class StockRepository : GenericRepository<Stock>, IStockRepository
     {
-        public ProductRepository(DbContextClass dbContext):base(dbContext)
+        public StockRepository(DbContextClass context) : base(context)
         {
             
         }

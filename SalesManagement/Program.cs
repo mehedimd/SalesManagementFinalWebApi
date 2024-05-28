@@ -25,6 +25,7 @@ builder.Services.AddScoped<IOrderItemService, OrderItemsService>();
 builder.Services.AddScoped<ISalesTargetService, SalesTargetService>();
 builder.Services.AddScoped<ISalesAchivementService, SalesAchivementService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IStockService, StockService>();
 
 // enable cors
 builder.Services.AddCors(option => option.AddPolicy("corsPolicy",policy=> policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod()));

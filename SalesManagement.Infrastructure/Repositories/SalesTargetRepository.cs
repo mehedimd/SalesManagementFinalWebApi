@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
-    internal class SalesTargetRepository:GenericRepository<SalesTarget>,ISalesTargetRepository
+    public class SalesTargetRepository:GenericRepository<SalesTarget>,ISalesTargetRepository
     {
         public SalesTargetRepository(DbContextClass dbContext) : base(dbContext)
         {
