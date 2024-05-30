@@ -21,6 +21,7 @@ namespace SalesManagement.Infrastructure.Repositories
             var orderList = from o in db.Orders
                             join pharmacy in db.Pharmacies
                             on o.PharmacyId equals pharmacy.PharmacyId
+                            orderby o.OrderDate descending
                             select new
                             {
                                 o.OrderId,
@@ -85,15 +86,15 @@ namespace SalesManagement.Infrastructure.Repositories
                         db.Orders.Add(order);
                         if (db.SaveChanges() > 0)
                         {
-                            foreach(var item in order.OrderItems)
-                            {
-                                var productId = item.ProductId;
-                                var qty = item.Quantity;
-                                var stockItem = db.Stocks.Where(s => s.ProductId == productId).FirstOrDefault();
-                                stockItem.Quantity = stockItem.Quantity - qty;
-                                db.Stocks.Update(stockItem);
-                                db.SaveChanges();
-                            }
+                            //foreach(var item in order.OrderItems)
+                            //{
+                            //    var productId = item.ProductId;
+                            //    var qty = item.Quantity;
+                            //    var stockItem = db.Stocks.Where(s => s.ProductId == productId).FirstOrDefault();
+                            //    stockItem.Quantity = stockItem.Quantity - qty;
+                            //    db.Stocks.Update(stockItem);
+                            //    db.SaveChanges();
+                            //}
                             transaction.Commit();
                             return true;
                         }
@@ -133,6 +134,18 @@ namespace SalesManagement.Infrastructure.Repositories
                     db.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     if (db.SaveChanges() > 0)
                     {
+                        if (order.IsApproved)
+                        {
+                            foreach (var item in order.OrderItems)
+                            {
+                                var productId = item.ProductId;
+                                var qty = item.Quantity;
+                                var stockItem = db.Stocks.Where(s => s.ProductId == productId).FirstOrDefault();
+                                stockItem.Quantity = stockItem.Quantity - qty;
+                                db.Stocks.Update(stockItem);
+                                db.SaveChanges();
+                            }
+                        }
                         transaction.Commit();
                         return true;
                     }
