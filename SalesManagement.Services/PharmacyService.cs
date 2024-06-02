@@ -87,6 +87,7 @@ namespace SalesManagement.Services
                     pharmacyFind.City = pharmacy.City;
                     pharmacyFind.Country = pharmacy.Country;
                     pharmacyFind.PostalCode = pharmacy.PostalCode;
+                    pharmacyFind.RouteId = pharmacy.RouteId;
 
 
                     _unitOfWork.Pharmacies.Update(pharmacyFind);

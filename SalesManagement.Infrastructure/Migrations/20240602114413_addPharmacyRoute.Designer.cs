@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesManagement.Infrastructure;
 
@@ -11,9 +12,10 @@ using SalesManagement.Infrastructure;
 namespace SalesManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    partial class DbContextClassModelSnapshot : ModelSnapshot
+    [Migration("20240602114413_addPharmacyRoute")]
+    partial class addPharmacyRoute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,7 +265,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Employee", b =>
@@ -316,7 +318,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Order", b =>
@@ -354,7 +356,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("PharmacyId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.OrderItems", b =>
@@ -385,7 +387,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Pharmacy", b =>
@@ -435,7 +437,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("RouteId");
 
-                    b.ToTable("Pharmacies", (string)null);
+                    b.ToTable("Pharmacies");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.PharmacyRoute", b =>
@@ -452,7 +454,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PharmacyRoute", (string)null);
+                    b.ToTable("PharmacyRoute");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Product", b =>
@@ -481,7 +483,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.SalesAchivement", b =>
@@ -502,7 +504,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("SalesTargetsId");
 
-                    b.ToTable("SalesAchivements", (string)null);
+                    b.ToTable("SalesAchivements");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.SalesTarget", b =>
@@ -526,7 +528,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("SalesTargets", (string)null);
+                    b.ToTable("SalesTargets");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Stock", b =>
@@ -547,7 +549,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Stocks", (string)null);
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.Unit", b =>
@@ -564,7 +566,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasKey("UnitId");
 
-                    b.ToTable("Units", (string)null);
+                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("SalesManagement.Core.Models.UnitConvertion", b =>
@@ -590,7 +592,7 @@ namespace SalesManagement.Infrastructure.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("UnitConvertions", (string)null);
+                    b.ToTable("UnitConvertions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
