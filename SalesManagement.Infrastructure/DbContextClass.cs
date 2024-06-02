@@ -40,6 +40,7 @@ namespace SalesManagement.Infrastructure
         public virtual DbSet<Unit> Units { get; set; } = null!;
         public virtual DbSet<UnitConvertion> UnitConvertions { get; set; } = null!;
         public virtual DbSet<Stock> Stocks { get; set; } = null!;
+        public virtual DbSet<PharmacyRoute> PharmacyRoute { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

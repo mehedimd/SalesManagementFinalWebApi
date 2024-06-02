@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SalesManagement.Core.Models
 {
@@ -19,6 +20,9 @@ namespace SalesManagement.Core.Models
         public string City { get; set; } = null!;
         public string State { get; set; } = null!;
         public string PostalCode { get; set; } = null!;
+        [ForeignKey("PharmacyRoute")]
+        public int RouteId { get; set; }
+        public PharmacyRoute? PharmacyRoute { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }

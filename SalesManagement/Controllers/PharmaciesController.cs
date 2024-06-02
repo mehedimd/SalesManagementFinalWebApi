@@ -16,10 +16,12 @@ namespace SalesManagement.Controllers
     public class PharmaciesController : ControllerBase
     {
         private readonly IPharmacyService pharmacyService;
+        private readonly DbContextClass db;
 
-        public PharmaciesController(IPharmacyService context)
+        public PharmaciesController(IPharmacyService context, DbContextClass _db)
         {
             pharmacyService = context;
+            this.db = _db;
         }
 
         // GET: api/Pharmacies
@@ -95,6 +97,18 @@ namespace SalesManagement.Controllers
             }
 
             return BadRequest();
+        }
+
+        // get pharmacy by route id
+        [HttpGet("GetByRoute/{id}")]
+        public async Task<ActionResult<IEnumerable<Pharmacy>>> GetByRoute(int id)
+        {
+            var filterPharmacy = await db.Pharmacies.Where(p => p.RouteId == id).ToListAsync();
+            if(filterPharmacy != null)
+            {
+                return Ok(filterPharmacy);
+            }
+            return NotFound();
         }
 
     }
