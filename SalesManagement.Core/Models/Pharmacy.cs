@@ -22,7 +22,7 @@ namespace SalesManagement.Core.Models
         public string PostalCode { get; set; } = null!;
         [ForeignKey("PharmacyRoute")]
         public int RouteId { get; set; }
-        public PharmacyRoute PharmacyRoute { get; set; }
+        public PharmacyRoute? PharmacyRoute { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }
