@@ -1,3 +1,5 @@
+--How To Use This API for Project--
+
 1. First clone the repository.
 
 2. Open the solution and select Set as Startup Project "SalesManagement.Infrastructure". 
