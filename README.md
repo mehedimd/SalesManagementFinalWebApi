@@ -4,7 +4,7 @@
 
 3. Run the update-database command in the package manager console.
 
-Special Note: If your database already has a database named "SalesManagmentFinalDB", it must first be deleted, then the update database command must be run.
+  Special Note: If your database already has a database named "SalesManagmentFinalDB", it must first be deleted, then the update database      command must be run.
 
 4. In the cloned repository you will see a .sql file named "Dummy Data for SalesManagementDB.sql", this query needs to be executed. In this you will get the necessary dummy data for all the tables to test the application.
 
