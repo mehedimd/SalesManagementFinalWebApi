@@ -54,13 +54,13 @@ namespace SalesManagement.Infrastructure
             base.OnModelCreating(builder);
 
             // for user role
-            List<IdentityRole> identityRoles = new List<IdentityRole>(){
-                        new IdentityRole(){ Name = "manager", NormalizedName = "manager"},
-                        new IdentityRole(){ Name = "sr", NormalizedName = "sr"},
-                        new IdentityRole(){ Name = "rider", NormalizedName = "rider"}
+            //List<IdentityRole> identityRoles = new List<IdentityRole>(){
+            //            new IdentityRole(){ Name = "manager", NormalizedName = "manager"},
+            //            new IdentityRole(){ Name = "sr", NormalizedName = "sr"},
+            //            new IdentityRole(){ Name = "rider", NormalizedName = "rider"}
 
-                    };
-            builder.Entity<IdentityRole>().HasData(identityRoles);
+            //        };
+            //builder.Entity<IdentityRole>().HasData(identityRoles);
 
         }
 
