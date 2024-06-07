@@ -1,4 +1,16 @@
---How To Use This API for Project--
+## Technology Use:
+• ASP.NET Core 6 Web API
+• Unit of Work with Repository Pattern
+• Authentication using Asp.net Core Identity & JWT Token
+• CORS Origin, Scoped
+• SOLID Principle
+• MS SQL Server 2019
+
+## IDE Use:
+• Visual Studio 2022 • SSMS
+
+
+# --How To Use This API for Project--
 
 1. First clone the repository.
 
