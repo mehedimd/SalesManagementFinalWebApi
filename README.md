@@ -1,9 +1,14 @@
 ## Technology Use:
 • ASP.NET Core 6 Web API
+
 • Unit of Work with Repository Pattern
+
 • Authentication using Asp.net Core Identity & JWT Token
+
 • CORS Origin, Scoped
+
 • SOLID Principle
+
 • MS SQL Server 2019
 
 ## IDE Use:
