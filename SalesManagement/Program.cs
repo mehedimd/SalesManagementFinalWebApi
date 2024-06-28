@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using SalesManagement.Core.Interfaces;
 using SalesManagement.Core.Models;
 using SalesManagement.Infrastructure;
 using SalesManagement.Infrastructure.ServiceExtension;
@@ -60,6 +61,9 @@ builder.Services.AddAuthentication(option =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345"))
     };
 });
+
+// register ITokenService
+builder.Services.AddTransient<ITokenService, TokenService>();
 // My Written Code End
 
 // Add services to the container.
