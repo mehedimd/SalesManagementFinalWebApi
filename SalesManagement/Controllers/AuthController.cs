@@ -101,7 +101,8 @@ namespace SalesManagement.Controllers
                             return Ok(new AuthenticatedResponse
                             {
                                 Token = accessToken,
-                                RefreshToken = refreshToken
+                                RefreshToken = refreshToken,
+                                Role = role.FirstOrDefault()
                             });
                         }
 
