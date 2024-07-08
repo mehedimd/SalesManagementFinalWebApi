@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Routing;
 
 namespace SalesManagement.Infrastructure.Repositories
 {
@@ -40,6 +41,8 @@ namespace SalesManagement.Infrastructure.Repositories
             var order = (from o in db.Orders
                          join p in db.Pharmacies
                          on o.PharmacyId equals p.PharmacyId
+                         join r in db.PharmacyRoute
+                         on p.RouteId equals r.Id
                         where o.OrderId == id
                         select new
                         {
@@ -50,7 +53,8 @@ namespace SalesManagement.Infrastructure.Repositories
                             o.IsApproved,
                             o.IsDelivered,
                             o.PharmacyId,
-                            p.PharmacyName
+                            p.PharmacyName,
+                            RouteId = r.Id
                             
                         }).FirstOrDefault();
             var orderItems = (from o in db.OrderItems
