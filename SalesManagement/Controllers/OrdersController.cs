@@ -14,7 +14,6 @@ namespace SalesManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService orderService;
@@ -45,7 +44,9 @@ namespace SalesManagement.Controllers
             }
             return orders;
         }
+
         // GET: api/Orders/5
+        [Authorize]
         [HttpGet("{id}")]
         public System.Object GetOrder(int id)
         {
@@ -60,6 +61,7 @@ namespace SalesManagement.Controllers
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public System.Object PutOrder( Order order)
         {
@@ -75,7 +77,7 @@ namespace SalesManagement.Controllers
         }
 
         // POST: api/Orders
-        [HttpPost]
+        [HttpPost,Authorize]
         public System.Object PostOrder(Order order)
         {
             if (order != null)
@@ -91,6 +93,7 @@ namespace SalesManagement.Controllers
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteOrder(int id)
         {
             var isDeleted = await orderService.DeleteOrder(id);
