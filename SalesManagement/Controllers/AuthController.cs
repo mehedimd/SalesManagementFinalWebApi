@@ -102,7 +102,8 @@ namespace SalesManagement.Controllers
                             {
                                 Token = accessToken,
                                 RefreshToken = refreshToken,
-                                Role = role.FirstOrDefault()
+                                Role = role.FirstOrDefault(),
+                                applicationUser = logInuser
                             });
                         }
 
