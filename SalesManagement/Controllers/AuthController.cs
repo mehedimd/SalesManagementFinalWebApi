@@ -61,14 +61,14 @@ namespace SalesManagement.Controllers
             else
             {
                 var existUser = await userManager.FindByEmailAsync(user.UserName);
-                var logInuser = new { userName = existUser.UserName, FirstName = existUser.FirstName, LastName = existUser.LastName };
                 if (existUser == null)
                 {
                     return Unauthorized(new { error = "invalid username" });
                 }
                 else
                 {
-                    
+                var logInuser = new { userName = existUser.UserName, FirstName = existUser.FirstName, LastName = existUser.LastName };
+
                     var checkPass = await userManager.CheckPasswordAsync(existUser, user.Password);
                     if (checkPass)
                     {
@@ -102,9 +102,15 @@ namespace SalesManagement.Controllers
                             {
                                 Token = accessToken,
                                 RefreshToken = refreshToken,
-                                Role = role.FirstOrDefault()
+                                Role = role.FirstOrDefault(),
+                                applicationUser = logInuser
                             });
                         }
+
+                    }
+                    else
+                    {
+                        return Unauthorized(new { error = "Invalid password" });
 
                     }
                 }

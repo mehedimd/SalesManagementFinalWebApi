@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SalesManagement.Core.Interfaces;
 using SalesManagement.Core.Models;
@@ -13,11 +14,13 @@ namespace SalesManagement.Controllers
     {
         private readonly DbContextClass dbContext;
         private readonly ITokenService tokenService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public TokenController(DbContextClass db, ITokenService _tokenService)
+        public TokenController(DbContextClass db, ITokenService _tokenService, UserManager<ApplicationUser> _userManager)
         {
             this.dbContext = db;
             this.tokenService = _tokenService;
+            this.userManager = _userManager;
         }
 
         [HttpPost]
@@ -36,11 +39,11 @@ namespace SalesManagement.Controllers
 
             var user = dbContext.Users.FirstOrDefault(u => u.UserName == username);
 
-            if(user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
             {
                 return BadRequest("Invalid client request");
             }
-
+            var role = userManager.GetRolesAsync(user).Result.FirstOrDefault();
             var newAccessToken = tokenService.GenerateAccessToken(principal.Claims);
             var newRefreshToken = tokenService.GenerateRefreshToken();
 
@@ -51,7 +54,9 @@ namespace SalesManagement.Controllers
             return Ok(new AuthenticatedResponse()
             {
                 Token = newAccessToken,
-                RefreshToken = newRefreshToken
+                RefreshToken = newRefreshToken,
+                Role = role,
+                applicationUser = user,
             });
         }
         [HttpPost, Authorize]
